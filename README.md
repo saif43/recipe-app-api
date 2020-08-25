@@ -62,3 +62,13 @@ docker-compose run app sh -c "django-admin.py startproject app ."
 ```
 
 ---
+
+## Create core app
+
+Run
+
+```bash
+docker-compose run app sh -c "python manage.py startapp core"
+```
+
+---

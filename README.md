@@ -237,3 +237,7 @@ Run
 ```bash
 docker-compose run --rm app sh -c "python manage.py startapp user"
 ```
+
+## viewsets.GenericViewSet & mixins.ListModelMixin
+
+If we want to create a retrive API only, then we would use the combination of `viewsets.GenericViewSet` and `mixins.ListModelMixin`

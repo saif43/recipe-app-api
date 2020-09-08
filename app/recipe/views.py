@@ -15,9 +15,28 @@ class BaseAttrViewSet(
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        """Return objects fir the current authenticated user only"""
+
+        queryset = self.queryset
+
+        """we might not pass assigned_only get parameter, thats why we are using try catch to get rid of typeError"""
+        try:
+            assigned_only = bool(int(self.request.query_params.get("assigned_only")))
+
+            if assigned_only:
+                # filter those tags/ingredients which are assigned
+                queryset = queryset.filter(recipe__isnull=False)
+            else:
+                # filter those tags/ingredients which are not assigned
+                queryset = queryset.filter(recipe__isnull=True)
+        except:
+            pass
+
+        return queryset.filter(user=self.request.user).order_by("-name").distinct()
+        # return self.queryset.filter(user=self.request.user)
 
     def perform_create(self, serializer):
+        """Creates a new object"""
         serializer.save(user=self.request.user)
 
 

@@ -58,7 +58,7 @@ docker-compose build
 Run
 
 ```bash
-docker-compose run app sh -c "django-admin.py startproject app ."
+docker-compose run app sh -c "django-admin startproject app ."
 ```
 
 ---
